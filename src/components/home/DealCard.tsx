@@ -1,8 +1,7 @@
 import { motion } from "framer-motion"
-import { Calendar, DollarSign, Tag, ToggleLeft, ToggleRight, MessageCircle } from "lucide-react"
+import { DollarSign, ArrowRight, Rocket } from "lucide-react"
 import { GlassCard } from "@/components/ui/glass-card"
 import { GlassButton } from "@/components/ui/glass-button"
-import { Badge } from "@/components/ui/badge"
 
 interface Deal {
   id: string
@@ -19,91 +18,75 @@ interface DealCardProps {
   onToggle: () => void
 }
 
+// Mock received date for demo
+const getReceivedDate = () => {
+  const today = new Date()
+  const daysAgo = Math.floor(Math.random() * 7) + 1
+  const receivedDate = new Date(today.setDate(today.getDate() - daysAgo))
+  return receivedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+}
+
 export default function DealCard({ deal, onToggle }: DealCardProps) {
   return (
-    <GlassCard className="p-6 hover:shadow-float transition-all group">
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-        {/* Left Content */}
-        <div className="flex-1 space-y-4">
-          <div className="flex items-start justify-between">
-            <div>
-              <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
-                {deal.brandName}
-              </h3>
-              <Badge variant="secondary" className="mb-3">
-                <Tag className="w-3 h-3 mr-1" />
-                {deal.type}
-              </Badge>
-            </div>
-          </div>
-          
-          <p className="text-muted-foreground leading-relaxed">
-            {deal.summary}
-          </p>
-          
-          {/* Deal Details */}
-          <div className="flex flex-wrap gap-4 text-sm">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <DollarSign className="w-4 h-4 text-success" />
-              <span className="font-medium">{deal.budget}</span>
-            </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Calendar className="w-4 h-4 text-warning" />
-              <span>Due in {deal.deadline}</span>
-            </div>
-          </div>
+    <GlassCard className="p-4 hover:shadow-float transition-all group bg-white/90 border border-secondary/20">
+      {/* Header with Date */}
+      <div className="flex justify-between items-start mb-3">
+        <div className="text-xs text-secondary/60">
+          {deal.type}
         </div>
-
-        {/* Right Actions */}
-        <div className="flex flex-col sm:flex-row lg:flex-col gap-3 lg:min-w-[160px]">
-          <GlassButton
-            variant="toggle"
-            onClick={onToggle}
-            className={`${
-              deal.isActive 
-                ? 'bg-primary-soft border-primary text-primary' 
-                : 'hover:border-primary/50'
-            } transition-all`}
-          >
-            {deal.isActive ? (
-              <>
-                <ToggleRight className="w-4 h-4 mr-2" />
-                Active
-              </>
-            ) : (
-              <>
-                <ToggleLeft className="w-4 h-4 mr-2" />
-                Continue
-              </>
-            )}
-          </GlassButton>
-          
-          {deal.isActive && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.2 }}
-            >
-              <GlassButton 
-                variant="primary" 
-                size="sm"
-                onClick={() => window.location.href = `/chat/${deal.id}`}
-                className="w-full lg:w-auto"
-              >
-                <MessageCircle className="w-4 h-4 mr-2" />
-                Open Chat
-              </GlassButton>
-            </motion.div>
-          )}
+        <div className="text-xs text-secondary/50 bg-secondary/5 px-2 py-1 rounded-md">
+          {getReceivedDate()}
         </div>
       </div>
-
+      
+      {/* Deal Title & Company */}
+      <div className="mb-3">
+        <h3 className="text-lg font-medium text-secondary mb-1 group-hover:text-secondary/80 transition-colors">
+          {deal.brandName}
+        </h3>
+        <p className="text-xs text-secondary/70 line-clamp-2 leading-relaxed">
+          {deal.summary}
+        </p>
+      </div>
+      
+      {/* Budget - Highlighted */}
+      <div className="mb-4">
+        <div className="flex items-center gap-2 p-3 bg-gradient-primary rounded-lg">
+          <DollarSign className="w-4 h-4 text-white" />
+          <span className="font-semibold text-white text-sm">{deal.budget}</span>
+        </div>
+      </div>
+      
+      {/* Continue Button - Main Action */}
+      <GlassButton
+        variant="toggle"
+        onClick={onToggle}
+        className={`w-full justify-center group/btn ${
+          deal.isActive 
+            ? 'bg-secondary text-white border-secondary shadow-glow' 
+            : 'bg-white/80 hover:bg-secondary hover:text-white border-secondary/30'
+        } transition-all duration-300`}
+        size="sm"
+      >
+        {deal.isActive ? (
+          <>
+            <Rocket className="w-4 h-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
+            Active
+          </>
+        ) : (
+          <>
+            <ArrowRight className="w-4 h-4 mr-2 group-hover/btn:translate-x-1 transition-transform" />
+            Continue
+          </>
+        )}
+      </GlassButton>
+      
       {/* Active Deal Indicator */}
       {deal.isActive && (
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          className="h-1 bg-gradient-primary rounded-full mt-4 origin-left"
+          className="h-0.5 bg-gradient-primary rounded-full mt-3 origin-left"
         />
       )}
     </GlassCard>

@@ -134,7 +134,7 @@ export default function ChatPage({ dealId, activeDeals, onNavigateToHome }: Chat
   }
 
   return (
-    <div className="min-h-screen bg-gradient-automation flex">
+    <div className="min-h-screen bg-white flex pt-20">
       {/* Sidebar */}
       <ChatSidebar 
         activeDeals={activeDeals}
@@ -145,33 +145,33 @@ export default function ChatPage({ dealId, activeDeals, onNavigateToHome }: Chat
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <div className="p-6 border-b bg-background/50 backdrop-blur-md">
+        <div className="p-4 border-b border-secondary/20 bg-white/95 backdrop-blur-md">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
-                <Building className="w-6 h-6 text-primary-foreground" />
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
+                <Building className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-semibold">{currentDeal.brandName}</h1>
-                <p className="text-muted-foreground">{currentDeal.type}</p>
+                <h1 className="text-lg font-medium text-secondary">{currentDeal.brandName}</h1>
+                <p className="text-xs text-secondary/60">{currentDeal.type}</p>
               </div>
             </div>
             
-            <div className="flex items-center space-x-4">
-              <Badge variant="secondary" className="px-3 py-1">
-                <DollarSign className="w-3 h-3 mr-1" />
+            <div className="flex items-center space-x-2">
+              <div className="text-xs text-secondary/60 bg-secondary/5 px-2 py-1 rounded-md">
+                <DollarSign className="w-3 h-3 inline mr-1" />
                 {currentDeal.budget}
-              </Badge>
-              <Badge variant="outline" className="px-3 py-1">
-                <Calendar className="w-3 h-3 mr-1" />
+              </div>
+              <div className="text-xs text-secondary/60 bg-secondary/5 px-2 py-1 rounded-md">
+                <Calendar className="w-3 h-3 inline mr-1" />
                 {currentDeal.deadline}
-              </Badge>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4">
           <AnimatePresence>
             {messages.map((message, index) => (
               <motion.div
@@ -182,34 +182,34 @@ export default function ChatPage({ dealId, activeDeals, onNavigateToHome }: Chat
                 className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div className={`
-                  max-w-2xl flex items-start space-x-3
+                  max-w-xl flex items-start space-x-2
                   ${message.sender === "user" ? "flex-row-reverse space-x-reverse" : ""}
                 `}>
                   {/* Avatar */}
                   <div className={`
-                    w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0
+                    w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0
                     ${message.sender === "ai" 
                       ? "bg-gradient-primary" 
                       : message.sender === "brand"
                       ? "bg-gradient-secondary"
-                      : "bg-accent"
+                      : "bg-secondary"
                     }
                   `}>
-                    {message.sender === "ai" && <Bot className="w-5 h-5 text-primary-foreground" />}
-                    {message.sender === "brand" && <Building className="w-5 h-5 text-secondary-foreground" />}
-                    {message.sender === "user" && <User className="w-5 h-5 text-accent-foreground" />}
+                    {message.sender === "ai" && <Bot className="w-4 h-4 text-white" />}
+                    {message.sender === "brand" && <Building className="w-4 h-4 text-white" />}
+                    {message.sender === "user" && <User className="w-4 h-4 text-white" />}
                   </div>
 
                   {/* Message Content */}
                   <div className={`
-                    p-4 rounded-xl max-w-lg
+                    p-3 rounded-lg max-w-md text-sm
                     ${message.sender === "user" 
-                      ? "bg-primary text-primary-foreground ml-auto" 
-                      : "glass-card"
+                      ? "bg-gradient-primary text-white ml-auto" 
+                      : "bg-white/90 border border-secondary/20 text-secondary"
                     }
                   `}>
                     <p className="leading-relaxed">{message.content}</p>
-                    <p className="text-xs opacity-70 mt-2">
+                    <p className="text-xs opacity-70 mt-1">
                       {message.timestamp.toLocaleTimeString([], { 
                         hour: '2-digit', 
                         minute: '2-digit' 
@@ -278,20 +278,21 @@ export default function ChatPage({ dealId, activeDeals, onNavigateToHome }: Chat
         </div>
 
         {/* Input Area */}
-        <div className="p-6 border-t bg-background/50 backdrop-blur-md">
-          <div className="flex space-x-4">
+        <div className="p-4 border-t border-secondary/20 bg-white/95 backdrop-blur-md">
+          <div className="flex space-x-3">
             <Input
-              placeholder="Type your message or instruction for the AI agent..."
+              placeholder="Type your message..."
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-              className="flex-1 rounded-xl"
+              className="flex-1 rounded-lg border-secondary/20 h-9 text-sm"
             />
             <GlassButton 
               variant="primary" 
               onClick={handleSendMessage}
               disabled={!newMessage.trim()}
-              className="px-6"
+              size="sm"
+              className="px-4"
             >
               <Send className="w-4 h-4" />
             </GlassButton>

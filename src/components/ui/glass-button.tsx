@@ -8,20 +8,21 @@ const glassButtonVariants = cva(
   {
     variants: {
       variant: {
-        default: "glass-button text-foreground glow-on-hover",
-        primary: "bg-gradient-primary text-primary-foreground shadow-glow hover:shadow-float hover:scale-105",
-        secondary: "bg-gradient-secondary text-secondary-foreground shadow-glow hover:shadow-float hover:scale-105",
-        accent: "bg-accent text-accent-foreground glass-button glow-on-hover",
-        ghost: "hover:bg-muted hover:text-muted-foreground",
-        scan: "bg-gradient-primary text-primary-foreground shadow-glow hover:shadow-float transform hover:scale-105 active:scale-95 relative overflow-hidden",
-        toggle: "glass-button border-2 border-transparent data-[state=on]:border-primary data-[state=on]:bg-primary-soft data-[state=on]:text-primary hover:scale-105"
+        default: "bg-white/90 hover:bg-white text-secondary border border-secondary/20 hover:shadow-float",
+        primary: "bg-gradient-primary text-white hover:shadow-glow font-medium",
+        secondary: "bg-gradient-secondary text-white hover:shadow-float", 
+        ghost: "bg-white/60 hover:bg-white/80 text-secondary/80 hover:text-secondary border-transparent",
+        outline: "border border-secondary/30 bg-white/70 hover:bg-white/90 text-secondary",
+        scan: "bg-gradient-primary text-white hover:shadow-glow font-semibold hover:scale-105",
+        toggle: "bg-white/80 border border-secondary/30 hover:shadow-float text-secondary hover:bg-secondary hover:text-white transition-all duration-300"
       },
       size: {
-        default: "h-12 px-6 py-3",
-        sm: "h-9 px-4",
-        lg: "h-14 px-8 py-4",
-        xl: "h-16 px-12 py-5 text-lg",
-        icon: "h-12 w-12"
+        default: "h-9 px-4 py-2 text-sm rounded-lg",
+        xs: "h-6 px-2 text-xs rounded-md",
+        sm: "h-7 px-3 text-xs rounded-md",
+        lg: "h-10 px-6 text-sm rounded-lg",
+        xl: "h-11 px-8 text-sm rounded-lg font-medium",
+        icon: "h-9 w-9 rounded-lg"
       },
     },
     defaultVariants: {

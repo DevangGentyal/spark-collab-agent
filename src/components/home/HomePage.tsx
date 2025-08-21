@@ -79,19 +79,19 @@ export default function HomePage({ onDealActivate, activeDeals }: HomePageProps)
   }
 
   return (
-    <div className="min-h-screen bg-gradient-automation p-6">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
+    <div className="min-h-screen bg-white pt-20">
+      <div className="max-w-6xl mx-auto px-6 py-8">
+        {/* Minimal Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h1 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">
-            AgenticAI
+          <h1 className="text-4xl font-light text-secondary mb-3">
+            Discovery Board
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            AI-powered brand collaboration agent. Discover, negotiate, and manage partnerships seamlessly.
+          <p className="text-sm text-secondary/70 max-w-lg mx-auto">
+            AI-curated collaboration opportunities
           </p>
         </motion.div>
 
@@ -104,65 +104,28 @@ export default function HomePage({ onDealActivate, activeDeals }: HomePageProps)
               exit={{ opacity: 0, scale: 1.05 }}
               className="text-center"
             >
-              <div className="max-w-md mx-auto mb-12">
-                <div className="relative mb-8">
-                  <div className="absolute inset-0 bg-gradient-primary rounded-full blur-3xl opacity-20"></div>
-                  <div className="relative w-32 h-32 mx-auto bg-gradient-primary rounded-full flex items-center justify-center float-animation">
-                    <Sparkles className="w-16 h-16 text-primary-foreground" />
+              <div className="max-w-lg mx-auto text-center">
+                <div className="relative mb-12">
+                  <div className="absolute inset-0 bg-gradient-primary rounded-full blur-3xl opacity-10"></div>
+                  <div className="relative w-24 h-24 mx-auto bg-gradient-primary rounded-2xl flex items-center justify-center float-animation">
+                    <Sparkles className="w-12 h-12 text-white" />
                   </div>
                 </div>
                 
-                <h2 className="text-3xl font-semibold mb-4">Ready to Discover Deals?</h2>
-                <p className="text-muted-foreground mb-8">
-                  Our AI agent will scan for the best brand collaboration opportunities tailored to your profile.
+                <h2 className="text-2xl font-light text-secondary mb-3">Ready to Discover?</h2>
+                <p className="text-xs text-secondary/60 mb-12 max-w-sm mx-auto">
+                  Scan for AI-curated collaboration opportunities
                 </p>
                 
                 <GlassButton 
                   variant="scan" 
-                  size="xl"
+                  size="lg"
                   onClick={handleScanDeals}
-                  className="group"
+                  className="group px-8"
                 >
-                  <Scan className="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform" />
-                  Scan for Deals
-                  <Zap className="w-5 h-5 ml-3" />
+                  <Scan className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
+                  Scan for Opportunities
                 </GlassButton>
-              </div>
-
-              {/* Feature Cards */}
-              <div className="grid md:grid-cols-3 gap-6 mt-16">
-                {[
-                  {
-                    icon: Sparkles,
-                    title: "AI-Powered Matching",
-                    description: "Advanced algorithms match you with brands that align with your content and audience."
-                  },
-                  {
-                    icon: Zap,
-                    title: "Automated Negotiations",
-                    description: "Let our AI handle initial negotiations and contract discussions for you."
-                  },
-                  {
-                    icon: ArrowRight,
-                    title: "Seamless Workflow",
-                    description: "From discovery to payment, manage your entire collaboration pipeline."
-                  }
-                ].map((feature, index) => (
-                  <motion.div
-                    key={feature.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * index }}
-                  >
-                    <GlassCard className="text-center p-6 hover:shadow-float transition-all">
-                      <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <feature.icon className="w-6 h-6 text-primary-foreground" />
-                      </div>
-                      <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                      <p className="text-muted-foreground text-sm">{feature.description}</p>
-                    </GlassCard>
-                  </motion.div>
-                ))}
               </div>
             </motion.div>
           )}
@@ -187,17 +150,21 @@ export default function HomePage({ onDealActivate, activeDeals }: HomePageProps)
             >
               <div className="mb-8 flex justify-between items-center">
                 <div>
-                  <h2 className="text-3xl font-semibold mb-2">Available Opportunities</h2>
-                  <p className="text-muted-foreground">
-                    Found {deals.length} collaboration opportunities matching your profile
+                  <h2 className="text-2xl font-light text-secondary mb-1">Opportunities</h2>
+                  <p className="text-xs text-secondary/60">
+                    {deals.length} matches found
                   </p>
                 </div>
-                <GlassButton variant="ghost" onClick={() => setHomeState("initial")}>
+                <GlassButton 
+                  variant="primary" 
+                  size="sm"
+                  onClick={() => setHomeState("initial")}
+                >
                   Scan Again
                 </GlassButton>
               </div>
 
-              <div className="grid gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {deals.map((deal, index) => (
                   <motion.div
                     key={deal.id}

@@ -64,19 +64,19 @@ export default function RegistrationForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-automation py-12 px-4">
-      <div className="max-w-2xl mx-auto">
+    <div className="min-h-screen bg-white py-12 px-4 pt-24">
+      <div className="max-w-xl mx-auto">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
-          <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">
-            Welcome to AgenticAI
+          <h1 className="text-3xl font-light text-secondary mb-2">
+            Profile Setup
           </h1>
-          <p className="text-xl text-muted-foreground">
-            Set up your profile to start collaborating with brands
+          <p className="text-sm text-secondary/70">
+            Configure your collaboration preferences
           </p>
         </motion.div>
 
@@ -85,37 +85,29 @@ export default function RegistrationForm() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="flex justify-between mb-8"
+          className="flex justify-center mb-8"
         >
-          {steps.map((step, index) => (
-            <div key={step.id} className="flex flex-col items-center flex-1">
-              <div className={`
-                w-12 h-12 rounded-full flex items-center justify-center mb-2 transition-all
-                ${currentStep >= step.id 
-                  ? 'bg-gradient-primary text-primary-foreground shadow-glow' 
-                  : 'bg-muted text-muted-foreground'
-                }
-              `}>
-                <step.icon className="w-5 h-5" />
-              </div>
-              <div className="text-center">
-                <p className="text-sm font-medium">{step.title}</p>
-                <p className="text-xs text-muted-foreground hidden sm:block">{step.description}</p>
-              </div>
-              {index < steps.length - 1 && (
+          <div className="flex items-center space-x-3">
+            {steps.map((step, index) => (
+              <div key={step.id} className="flex items-center">
                 <div className={`
-                  absolute h-0.5 w-full mt-6 transition-all
-                  ${currentStep > step.id ? 'bg-primary' : 'bg-border'}
-                `} 
-                style={{ 
-                  left: `${(index + 1) * 25}%`, 
-                  width: `${100 / steps.length}%`,
-                  top: '24px',
-                  zIndex: -1
-                }} />
-              )}
-            </div>
-          ))}
+                  w-8 h-8 rounded-lg flex items-center justify-center transition-all
+                  ${currentStep >= step.id 
+                    ? 'bg-gradient-primary text-white' 
+                    : 'bg-secondary/10 text-secondary/50'
+                  }
+                `}>
+                  <step.icon className="w-4 h-4" />
+                </div>
+                {index < steps.length - 1 && (
+                  <div className={`
+                    h-0.5 w-8 mx-2 transition-all
+                    ${currentStep > step.id ? 'bg-secondary' : 'bg-secondary/20'}
+                  `} />
+                )}
+              </div>
+            ))}
+          </div>
         </motion.div>
 
         {/* Form Content */}
@@ -125,38 +117,38 @@ export default function RegistrationForm() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
         >
-          <GlassCard className="p-8">
+          <GlassCard className="p-6 bg-white/95 border border-secondary/20">
             {currentStep === 1 && (
-              <div className="space-y-6">
-                <h2 className="text-2xl font-semibold mb-6">Basic Information</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <h2 className="text-lg font-medium mb-4 text-secondary">Basic Information</h2>
+                <div className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="name">Full Name</Label>
+                    <Label htmlFor="name" className="text-sm text-secondary/80">Full Name</Label>
                     <Input 
                       id="name" 
                       placeholder="Enter your full name"
-                      className="rounded-xl"
+                      className="rounded-lg border-secondary/20 h-9 text-sm"
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email Address</Label>
+                    <Label htmlFor="email" className="text-sm text-secondary/80">Email Address</Label>
                     <Input 
                       id="email" 
                       type="email" 
                       placeholder="Enter your email"
-                      className="rounded-xl"
+                      className="rounded-lg border-secondary/20 h-9 text-sm"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
                     />
                   </div>
-                  <div className="space-y-2 md:col-span-2">
-                    <Label htmlFor="company">Company/Brand (Optional)</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="company" className="text-sm text-secondary/80">Company/Brand</Label>
                     <Input 
                       id="company" 
                       placeholder="Your company or personal brand"
-                      className="rounded-xl"
+                      className="rounded-lg border-secondary/20 h-9 text-sm"
                       value={formData.company}
                       onChange={(e) => setFormData({...formData, company: e.target.value})}
                     />
