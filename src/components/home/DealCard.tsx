@@ -28,67 +28,67 @@ const getReceivedDate = () => {
 
 export default function DealCard({ deal, onToggle }: DealCardProps) {
   return (
-    <GlassCard className="p-4 hover:shadow-float transition-all group bg-white/90 border border-secondary/20">
-      {/* Header with Date */}
-      <div className="flex justify-between items-start mb-3">
-        <div className="text-xs text-secondary/60">
+    <div className="professional-glass rounded-xl p-6 hover:shadow-float transition-all duration-300 group">
+      {/* Header: Type and Date */}
+      <div className="flex justify-between items-start mb-4">
+        <span className="text-xs font-medium text-muted-foreground bg-muted px-3 py-1 rounded-full">
           {deal.type}
-        </div>
-        <div className="text-xs text-secondary/50 bg-secondary/5 px-2 py-1 rounded-md">
+        </span>
+        <span className="text-xs text-muted-foreground bg-secondary/10 text-secondary px-2 py-1 rounded-md font-medium">
           {getReceivedDate()}
-        </div>
+        </span>
       </div>
       
-      {/* Deal Title & Company */}
-      <div className="mb-3">
-        <h3 className="text-lg font-medium text-secondary mb-1 group-hover:text-secondary/80 transition-colors">
-          {deal.brandName}
-        </h3>
-        <p className="text-xs text-secondary/70 line-clamp-2 leading-relaxed">
+      {/* Deal Title - Orange Heading */}
+      <h3 className="text-lg font-bold text-secondary mb-2 group-hover:text-secondary/80 transition-colors">
+        {deal.brandName}
+      </h3>
+      
+      {/* Company Info */}
+      <div className="mb-4">
+        <p className="text-sm text-foreground/80 line-clamp-2 leading-relaxed">
           {deal.summary}
         </p>
       </div>
       
-      {/* Budget - Highlighted */}
-      <div className="mb-4">
-        <div className="flex items-center gap-2 p-3 bg-gradient-primary rounded-lg">
-          <DollarSign className="w-4 h-4 text-white" />
-          <span className="font-semibold text-white text-sm">{deal.budget}</span>
+      {/* Budget Section - Highlighted */}
+      <div className="mb-6">
+        <div className="flex items-center gap-3 p-4 bg-gradient-primary rounded-lg shadow-glow">
+          <DollarSign className="w-5 h-5 text-white" />
+          <span className="font-bold text-white text-base">{deal.budget}</span>
         </div>
       </div>
       
-      {/* Continue Button - Main Action */}
-      <GlassButton
-        variant="toggle"
+      {/* Continue Button - Black Primary */}
+      <button
         onClick={onToggle}
-        className={`w-full justify-center group/btn ${
+        className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-semibold transition-all duration-300 ${
           deal.isActive 
-            ? 'bg-secondary text-white border-secondary shadow-glow' 
-            : 'bg-white/80 hover:bg-secondary hover:text-white border-secondary/30'
-        } transition-all duration-300`}
-        size="sm"
+            ? 'bg-secondary text-white shadow-glow' 
+            : 'bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-float'
+        }`}
       >
         {deal.isActive ? (
           <>
-            <Rocket className="w-4 h-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
-            Active
+            <Rocket className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+            Active Chat
           </>
         ) : (
           <>
-            <ArrowRight className="w-4 h-4 mr-2 group-hover/btn:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             Continue
           </>
         )}
-      </GlassButton>
+      </button>
       
       {/* Active Deal Indicator */}
       {deal.isActive && (
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          className="h-0.5 bg-gradient-primary rounded-full mt-3 origin-left"
+          className="h-1 bg-gradient-primary rounded-full mt-4 origin-left"
         />
       )}
-    </GlassCard>
+    </div>
   )
 }

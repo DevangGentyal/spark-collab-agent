@@ -134,7 +134,7 @@ export default function ChatPage({ dealId, activeDeals, onNavigateToHome }: Chat
   }
 
   return (
-    <div className="min-h-screen bg-white flex pt-20">
+    <div className="min-h-screen bg-background flex pt-20">
       {/* Sidebar */}
       <ChatSidebar 
         activeDeals={activeDeals}
@@ -143,27 +143,27 @@ export default function ChatPage({ dealId, activeDeals, onNavigateToHome }: Chat
       />
 
       {/* Main Chat Area */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col max-w-5xl mx-auto">
         {/* Header */}
-        <div className="p-4 border-b border-secondary/20 bg-white/95 backdrop-blur-md">
+        <div className="professional-glass p-6 border-b border-border/50">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <Building className="w-5 h-5 text-white" />
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
+                <Building className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-lg font-medium text-secondary">{currentDeal.brandName}</h1>
-                <p className="text-xs text-secondary/60">{currentDeal.type}</p>
+                <h1 className="text-2xl font-bold text-secondary">{currentDeal.brandName}</h1>
+                <p className="text-sm text-foreground/70">{currentDeal.type}</p>
               </div>
             </div>
             
-            <div className="flex items-center space-x-2">
-              <div className="text-xs text-secondary/60 bg-secondary/5 px-2 py-1 rounded-md">
-                <DollarSign className="w-3 h-3 inline mr-1" />
+            <div className="flex items-center space-x-3">
+              <div className="text-sm font-semibold text-secondary bg-secondary/10 px-4 py-2 rounded-lg">
+                <DollarSign className="w-4 h-4 inline mr-1" />
                 {currentDeal.budget}
               </div>
-              <div className="text-xs text-secondary/60 bg-secondary/5 px-2 py-1 rounded-md">
-                <Calendar className="w-3 h-3 inline mr-1" />
+              <div className="text-sm text-foreground/70 bg-muted px-4 py-2 rounded-lg">
+                <Calendar className="w-4 h-4 inline mr-1" />
                 {currentDeal.deadline}
               </div>
             </div>
@@ -171,7 +171,7 @@ export default function ChatPage({ dealId, activeDeals, onNavigateToHome }: Chat
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div className="flex-1 overflow-y-auto p-8 space-y-8">
           <AnimatePresence>
             {messages.map((message, index) => (
               <motion.div
@@ -182,34 +182,34 @@ export default function ChatPage({ dealId, activeDeals, onNavigateToHome }: Chat
                 className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div className={`
-                  max-w-xl flex items-start space-x-2
+                  max-w-2xl flex items-start space-x-4
                   ${message.sender === "user" ? "flex-row-reverse space-x-reverse" : ""}
                 `}>
                   {/* Avatar */}
                   <div className={`
-                    w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0
+                    w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0
                     ${message.sender === "ai" 
                       ? "bg-gradient-primary" 
                       : message.sender === "brand"
-                      ? "bg-gradient-secondary"
-                      : "bg-secondary"
+                      ? "bg-primary"
+                      : "bg-primary"
                     }
                   `}>
-                    {message.sender === "ai" && <Bot className="w-4 h-4 text-white" />}
-                    {message.sender === "brand" && <Building className="w-4 h-4 text-white" />}
-                    {message.sender === "user" && <User className="w-4 h-4 text-white" />}
+                    {message.sender === "ai" && <Bot className="w-5 h-5 text-white" />}
+                    {message.sender === "brand" && <Building className="w-5 h-5 text-white" />}
+                    {message.sender === "user" && <User className="w-5 h-5 text-white" />}
                   </div>
 
                   {/* Message Content */}
                   <div className={`
-                    p-3 rounded-lg max-w-md text-sm
+                    p-6 rounded-xl max-w-lg
                     ${message.sender === "user" 
-                      ? "bg-gradient-primary text-white ml-auto" 
-                      : "bg-white/90 border border-secondary/20 text-secondary"
+                      ? "bg-primary text-primary-foreground shadow-card" 
+                      : "professional-glass"
                     }
                   `}>
-                    <p className="leading-relaxed">{message.content}</p>
-                    <p className="text-xs opacity-70 mt-1">
+                    <p className="leading-relaxed text-sm">{message.content}</p>
+                    <p className="text-xs opacity-60 mt-3">
                       {message.timestamp.toLocaleTimeString([], { 
                         hour: '2-digit', 
                         minute: '2-digit' 
@@ -218,21 +218,19 @@ export default function ChatPage({ dealId, activeDeals, onNavigateToHome }: Chat
 
                     {/* AI Suggestions */}
                     {message.suggestions && (
-                      <div className="mt-4 space-y-2">
-                        <p className="text-sm font-medium flex items-center">
+                      <div className="mt-6 space-y-3">
+                        <p className="text-sm font-bold flex items-center text-secondary">
                           <Sparkles className="w-4 h-4 mr-2" />
                           Smart Suggestions:
                         </p>
                         {message.suggestions.map((suggestion, idx) => (
-                          <GlassButton
+                          <button
                             key={idx}
-                            variant="ghost"
-                            size="sm"
                             onClick={() => handleSuggestionClick(suggestion)}
-                            className="w-full justify-start text-left p-3 h-auto"
+                            className="w-full text-left p-4 professional-glass hover:bg-secondary hover:text-white rounded-lg transition-all duration-200 text-sm font-medium"
                           >
                             {suggestion}
-                          </GlassButton>
+                          </button>
                         ))}
                       </div>
                     )}
@@ -278,24 +276,22 @@ export default function ChatPage({ dealId, activeDeals, onNavigateToHome }: Chat
         </div>
 
         {/* Input Area */}
-        <div className="p-4 border-t border-secondary/20 bg-white/95 backdrop-blur-md">
-          <div className="flex space-x-3">
+        <div className="professional-glass p-6 border-t border-border/50">
+          <div className="flex space-x-4">
             <Input
               placeholder="Type your message..."
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-              className="flex-1 rounded-lg border-secondary/20 h-9 text-sm"
+              className="flex-1 professional-glass border border-border/50 rounded-xl h-12 text-sm px-6 focus:ring-2 focus:ring-secondary focus:border-secondary"
             />
-            <GlassButton 
-              variant="primary" 
+            <button
               onClick={handleSendMessage}
               disabled={!newMessage.trim()}
-              size="sm"
-              className="px-4"
+              className="bg-primary text-primary-foreground px-8 py-3 rounded-xl hover:bg-primary/90 transition-all duration-200 font-semibold disabled:opacity-50"
             >
-              <Send className="w-4 h-4" />
-            </GlassButton>
+              <Send className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </div>

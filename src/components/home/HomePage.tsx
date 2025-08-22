@@ -85,13 +85,13 @@ export default function HomePage({ onDealActivate, activeDeals }: HomePageProps)
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h1 className="text-4xl font-light text-secondary mb-3">
+          <h1 className="text-5xl md:text-6xl font-black text-secondary mb-6">
             Discovery Board
           </h1>
-          <p className="text-sm text-secondary/70 max-w-lg mx-auto">
-            AI-curated collaboration opportunities
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+            AI-curated collaboration opportunities tailored for you
           </p>
         </motion.div>
 
@@ -112,20 +112,18 @@ export default function HomePage({ onDealActivate, activeDeals }: HomePageProps)
                   </div>
                 </div>
                 
-                <h2 className="text-2xl font-light text-secondary mb-3">Ready to Discover?</h2>
-                <p className="text-xs text-secondary/60 mb-12 max-w-sm mx-auto">
+                <h2 className="text-3xl font-bold text-secondary mb-4">Ready to Discover?</h2>
+                <p className="text-lg text-foreground/70 mb-12 max-w-lg mx-auto">
                   Scan for AI-curated collaboration opportunities
                 </p>
                 
-                <GlassButton 
-                  variant="scan" 
-                  size="lg"
+                <button
                   onClick={handleScanDeals}
-                  className="group px-8"
+                  className="bg-gradient-primary text-white px-12 py-5 text-xl font-bold rounded-xl shadow-glow hover:shadow-float transition-all duration-300 flex items-center gap-3 mx-auto group"
                 >
-                  <Scan className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
+                  <Scan className="w-6 h-6 group-hover:rotate-12 transition-transform" />
                   Scan for Opportunities
-                </GlassButton>
+                </button>
               </div>
             </motion.div>
           )}
@@ -148,23 +146,20 @@ export default function HomePage({ onDealActivate, activeDeals }: HomePageProps)
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <div className="mb-8 flex justify-between items-center">
-                <div>
-                  <h2 className="text-2xl font-light text-secondary mb-1">Opportunities</h2>
-                  <p className="text-xs text-secondary/60">
-                    {deals.length} matches found
-                  </p>
-                </div>
-                <GlassButton 
-                  variant="primary" 
-                  size="sm"
+              <div className="mb-12 text-center">
+                <h2 className="text-3xl font-bold text-secondary mb-4">Opportunities</h2>
+                <p className="text-foreground/70 mb-8">
+                  {deals.length} premium matches found
+                </p>
+                <button
                   onClick={() => setHomeState("initial")}
+                  className="bg-gradient-primary text-white px-8 py-3 rounded-lg font-bold shadow-glow hover:shadow-float transition-all duration-300"
                 >
                   Scan Again
-                </GlassButton>
+                </button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                 {deals.map((deal, index) => (
                   <motion.div
                     key={deal.id}

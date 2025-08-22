@@ -44,36 +44,33 @@ const Index = () => {
             </motion.div>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-light mb-6">
+          <h1 className="text-6xl md:text-8xl font-black mb-8">
             <span className="text-secondary">
-              Agentic AI
+              AgenticAI
             </span>
             <br />
-            <span className="text-secondary/70 font-extralight">Brand Collaboration</span>
+            <span className="text-foreground font-medium">Brand Collaboration</span>
           </h1>
           
-          <p className="text-lg text-secondary/60 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
+          <p className="text-xl text-foreground/70 max-w-3xl mx-auto mb-16 leading-relaxed">
             AI agents that discover, negotiate, and manage brand partnerships. 
             Focus on creating while we handle the business.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <GlassButton 
-              variant="primary" 
-              size="lg"
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <button
               onClick={() => window.location.href = '/registration'}
-              className="group"
+              className="bg-gradient-primary text-white px-12 py-5 text-xl font-bold rounded-xl shadow-glow hover:shadow-float transition-all duration-300 flex items-center gap-3 mx-auto group"
             >
               Start Collaborating
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </GlassButton>
-            <GlassButton 
-              variant="ghost" 
-              size="lg"
+              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+            </button>
+            <button
               onClick={() => window.location.href = '/home'}
+              className="bg-primary text-primary-foreground px-12 py-5 text-xl font-bold rounded-xl hover:bg-primary/90 transition-all duration-300"
             >
               View Demo
-            </GlassButton>
+            </button>
           </div>
         </motion.div>
 
@@ -107,8 +104,8 @@ const Index = () => {
                 <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center mx-auto mb-4">
                   <feature.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-medium mb-3 text-secondary">{feature.title}</h3>
-                <p className="text-secondary/70 text-sm leading-relaxed font-light">{feature.description}</p>
+                <h3 className="text-lg font-bold mb-3 text-secondary">{feature.title}</h3>
+                <p className="text-foreground/70 text-sm leading-relaxed">{feature.description}</p>
               </GlassCard>
             </motion.div>
           ))}
@@ -122,22 +119,19 @@ const Index = () => {
           className="text-center"
         >
           <GlassCard className="p-8 max-w-2xl mx-auto bg-white/90 border border-secondary/20">
-            <h2 className="text-3xl font-light mb-4 text-secondary">
-              Ready to Transform Your 
-              <span className="text-secondary/80"> Collaborations?</span>
+            <h2 className="text-3xl font-bold mb-6 text-secondary">
+              Ready to Transform Your Collaborations?
             </h2>
-            <p className="text-lg text-secondary/60 mb-8 max-w-lg mx-auto font-light">
+            <p className="text-lg text-foreground/70 mb-8 max-w-lg mx-auto">
               Join creators who've automated partnerships and increased earnings.
             </p>
-            <GlassButton 
-              variant="primary" 
-              size="lg"
+            <button
               onClick={() => window.location.href = '/registration'}
-              className="group"
+              className="bg-gradient-primary text-white px-12 py-4 text-xl font-bold rounded-xl shadow-glow hover:shadow-float transition-all duration-300 flex items-center gap-3 mx-auto group"
             >
               Get Started Free
-              <Sparkles className="w-4 h-4 ml-2 group-hover:rotate-12 transition-transform" />
-            </GlassButton>
+              <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+            </button>
           </GlassCard>
         </motion.div>
       </div>
