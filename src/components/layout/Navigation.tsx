@@ -18,8 +18,8 @@ export default function Navigation() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <Brain className="w-5 h-5 text-secondary" />
+            <div className="w-8 h-8 bg-gradient-primary primary rounded-lg flex items-center justify-center">
+              <Brain className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold text-secondary">
               AgenticAI

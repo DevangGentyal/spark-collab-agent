@@ -64,18 +64,18 @@ export default function RegistrationForm() {
   }
 
   return (
-    <div className="min-h-screen bg-white py-12 px-4 pt-24">
-      <div className="max-w-xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 py-16 px-6 pt-28">
+      <div className="max-w-2xl mx-auto">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          className="text-center mb-12"
         >
-          <h1 className="text-3xl font-light text-secondary mb-2">
+          <h1 className="text-4xl font-semibold text-secondary mb-4">
             Profile Setup
           </h1>
-          <p className="text-sm text-secondary/70">
+          <p className="text-lg text-secondary/70 max-w-md mx-auto">
             Configure your collaboration preferences
           </p>
         </motion.div>

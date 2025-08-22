@@ -79,44 +79,28 @@ export default function HomePage({ onDealActivate, activeDeals }: HomePageProps)
   }
 
   return (
-    <div className="min-h-screen bg-white pt-20">
-      <div className="max-w-6xl mx-auto px-6 py-8">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-24">
+      <div className="max-w-7xl mx-auto px-8 py-12">
         {/* Minimal Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-20"
+          className="text-center mb-24"
         >
-          <h1 className="text-5xl md:text-6xl font-black text-secondary mb-6">
+          <div className="w-16 h-16 mx-auto bg-gradient-primary rounded-2xl flex items-center justify-center mb-8 shadow-glow">
+            <Sparkles className="w-8 h-8 text-white" />
+          </div>
+          <h1 className="text-6xl md:text-7xl font-black text-secondary mb-8 tracking-tight">
             Discovery Board
           </h1>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">
             AI-curated collaboration opportunities tailored for you
           </p>
         </motion.div>
 
         <AnimatePresence mode="wait">
           {homeState === "initial" && (
-            <motion.div
-              key="initial"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              className="text-center"
-            >
-              <div className="max-w-lg mx-auto text-center">
-                <div className="relative mb-12">
-                  <div className="absolute inset-0 bg-gradient-primary rounded-full blur-3xl opacity-10"></div>
-                  <div className="relative w-24 h-24 mx-auto bg-gradient-primary rounded-2xl flex items-center justify-center float-animation">
-                    <Sparkles className="w-12 h-12 text-white" />
-                  </div>
-                </div>
-                
-                <h2 className="text-3xl font-bold text-secondary mb-4">Ready to Discover?</h2>
-                <p className="text-lg text-foreground/70 mb-12 max-w-lg mx-auto">
-                  Scan for AI-curated collaboration opportunities
-                </p>
-                
+
                 <button
                   onClick={handleScanDeals}
                   className="bg-gradient-primary text-white px-12 py-5 text-xl font-bold rounded-xl shadow-glow hover:shadow-float transition-all duration-300 flex items-center gap-3 mx-auto group"
@@ -124,8 +108,7 @@ export default function HomePage({ onDealActivate, activeDeals }: HomePageProps)
                   <Scan className="w-6 h-6 group-hover:rotate-12 transition-transform" />
                   Scan for Opportunities
                 </button>
-              </div>
-            </motion.div>
+
           )}
 
           {homeState === "scanning" && (
